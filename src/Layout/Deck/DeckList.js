@@ -1,9 +1,6 @@
   
 import React, { useEffect, useState } from "react";
 import CreateDeckButton from "./CreateDeckButton";
-//import Header from "../Header";
-//import NotFound from "../NotFound";
-
 import Deck from "../Deck/Deck";
 import { listDecks } from "../../utils/api/index";
 

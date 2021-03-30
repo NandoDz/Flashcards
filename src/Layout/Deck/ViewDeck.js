@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from "react";
-import DeckView from "../Deck/DeckView";
+
+import DeckView from "./DeckView";
+
 import { Route, Switch, useRouteMatch } from "react-router-dom";
+
 import BreadCrumb from "../BreadCrumb";
 import { readDeck } from "../../utils/api";
-import CardList from "../Card/CardList.js";
+import CardList from "../Card/CardList";
 import StudyDeck from "./StudyDeck";
 import EditDeck from "./EditDeck";
 import CreateCard from "../Card/CreateCard";
@@ -26,14 +29,15 @@ export default function ViewDeck({ decks, setDecks }) {
     readDeck(deckId, abortController.signal)
       .then(setDeck)
       .then(() => {
-        if (deck.cards !== null) setCards([...deck.cards]);
+        if (deck.cards !== undefined) setCards([...deck.cards]);
       })
-      .catch(console.log("Error"));
+      .catch(console.log("bad"));
 
     return () => abortController.abort();
+    // eslint-disable-next-line
   }, []);
   useEffect(() => {
-    if (deck.cards !== null) setCards([...deck.cards]);
+    if (deck.cards !== undefined) setCards([...deck.cards]);
   }, [deck]);
 
   return (

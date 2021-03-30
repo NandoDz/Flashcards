@@ -29,6 +29,7 @@ export default function EditDeckForm({
   }, [deck]);
   useEffect(() => {
     setTempDeck({ name: name, description: description, id: params.deckId });
+    // eslint-disable-next-line
   }, [name, description]);
   function submitHandler(event) {
     event.preventDefault();

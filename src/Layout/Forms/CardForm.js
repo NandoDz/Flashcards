@@ -19,6 +19,7 @@ export default function CardForm({
   let decksTemp = decks;
   const deckTemp = deck;
   // if edit then setFormdata to current card using card id from url
+  // eslint-disable-next-line
   useEffect(() => {
     if (subUrls[subUrls.length - 1] === "edit") {
       setEdit(true);
@@ -26,7 +27,7 @@ export default function CardForm({
         .then(setFormData)
         .catch(console.log("Bad magnitude 10"));
     }
-  }, []);
+  });
 
   function handleChange({ target }) {
     setFormData(() => ({
@@ -43,19 +44,13 @@ export default function CardForm({
       theArguments = [formData, abortController.signal];
       handleFunction = updateCard;
     }
-    handleFunction(...theArguments) // change to update card for edit
-      // .then((response) => {
-      //   // setFormData({ ...response });
-      //   return { ...response };
-      // }) //setFormData
+    handleFunction(...theArguments)
       .then((response) => {
         deckTemp.cards = deckTemp.cards.filter(
           (card) => card.id !== response.id
         );
-        // console.log(`Before ::::: ${deckTemp.cards}`);
         deckTemp.cards.push(response);
         setDeck({ ...deckTemp });
-        // console.log(`After ::::: ${deckTemp.cards}`);
       })
       .then(() => {
         decksTemp = decksTemp.filter((theDeck) => theDeck.id !== deck.id);
